@@ -7,7 +7,7 @@ Before reaching for XGBoost or a neural net, run `stepzero`. It fits the simples
 ```python
 import stepzero as sz
 
-result = sz.classify(X, y)
+result = sz.classification(X, y)
 print(result)
 # ClassifyResult(best='logistic', accuracy=0.960, headroom='Low')
 
@@ -33,7 +33,7 @@ pip install stepzero
 ### Classification
 
 ```python
-result = sz.classify(X, y)
+result = sz.classification(X, y)
 
 result.best_model          # fitted sklearn Pipeline — call .predict(X_new) directly
 result.best_model_name     # "logistic" | "tree" | "naive_bayes"
@@ -48,7 +48,7 @@ Metric: accuracy (5-fold stratified CV).
 ### Regression
 
 ```python
-result = sz.regress(X, y)
+result = sz.regression(X, y)
 
 result.best_model_name     # "ridge" | "tree"
 result.feature_importance  # normalized importances as pd.Series
@@ -64,7 +64,7 @@ Metric: RMSE.
 import pandas as pd
 
 ts = pd.Series(..., index=pd.date_range("2020-01", periods=48, freq="ME"))
-result = sz.forecast(ts, horizon=12)
+result = sz.forecasting(ts, horizon=12)
 
 result.forecast            # pd.Series with future index
 result.best_model_name     # "seasonal_naive" | "linear_trend"
@@ -78,7 +78,7 @@ Metric: MAE (time-series CV).
 ### Anomaly Detection
 
 ```python
-result = sz.detect_anomalies(series)
+result = sz.anomaly_detection(series)
 
 result.anomalies           # pd.Series[bool], same index as input
 result.scores              # raw anomaly scores
@@ -92,7 +92,7 @@ Methods: Z-score, IQR. `method="auto"` (default) runs both and picks the most co
 ### Text Classification
 
 ```python
-result = sz.text_classify(texts, labels)
+result = sz.text_classification(texts, labels)
 
 result.best_model_name          # "tfidf_logistic" | "tfidf_naive_bayes"
 result.top_features_per_class   # {"class_0": ["word1", ...], ...}
@@ -104,7 +104,7 @@ Models compared: TF-IDF + Logistic Regression, TF-IDF + Multinomial Naive Bayes.
 ### Clustering
 
 ```python
-result = sz.cluster(X, k_range=(2, 10))
+result = sz.clustering(X, k_range=(2, 10))
 
 result.best_k     # selected number of clusters
 result.labels     # cluster assignment per sample (np.ndarray)

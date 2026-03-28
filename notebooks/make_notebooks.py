@@ -47,7 +47,7 @@ nb1 = nb([
 from sklearn.datasets import load_iris
 X, y = load_iris(return_X_y=True, as_frame=True)
 
-result = sz.classify(X, y)
+result = sz.classification(X, y)
 print(result)
 print()
 print(result.headroom)
@@ -67,7 +67,7 @@ result.feature_importance.plot(kind="barh", title="Feature importance")
 from sklearn.datasets import load_diabetes
 X, y = load_diabetes(return_X_y=True, as_frame=True)
 
-result = sz.regress(X, y)
+result = sz.regression(X, y)
 print(result)
 print()
 print(result.headroom)
@@ -91,7 +91,7 @@ ts = pd.Series(trend + seasonal + noise, index=idx, name="value")
 ts.plot(title="Training series", figsize=(10, 3))
 """),
     code("""\
-result = sz.forecast(ts, horizon=12)
+result = sz.forecasting(ts, horizon=12)
 print(result)
 print()
 print(result.headroom)
@@ -112,7 +112,7 @@ rng = np.random.default_rng(42)
 sensor = pd.Series(rng.normal(0, 1, 200), name="sensor")
 sensor.iloc[[20, 80, 140, 180]] = [6, -7, 8, -6]  # inject 4 spikes
 
-result = sz.detect_anomalies(sensor)
+result = sz.anomaly_detection(sensor)
 print(result)
 print()
 print(result.headroom)
@@ -132,7 +132,7 @@ from sklearn.datasets import fetch_20newsgroups
 cats = ["sci.space", "talk.politics.guns"]
 train = fetch_20newsgroups(subset="train", categories=cats)
 
-result = sz.text_classify(train.data, train.target, cv=3)
+result = sz.text_classification(train.data, train.target, cv=3)
 print(result)
 print()
 print(result.headroom)
@@ -150,7 +150,7 @@ from sklearn.datasets import make_blobs
 
 X_blobs, _ = make_blobs(n_samples=300, centers=4, cluster_std=0.8, random_state=0)
 
-result = sz.cluster(X_blobs, k_range=(2, 8))
+result = sz.clustering(X_blobs, k_range=(2, 8))
 print(result)
 print()
 print(result.headroom)
@@ -204,7 +204,7 @@ print(f"{len(X)} samples, {X.shape[1]} features, {len(set(y))} classes")
 X.head(3)
 """),
     code("""\
-result = sz.classify(X, y)
+result = sz.classification(X, y)
 print(result)
 print()
 print(result.headroom)
@@ -229,7 +229,7 @@ print(f"{len(X)} samples after dropping missing target")
 X.head(3)
 """),
     code("""\
-result = sz.classify(X, y)
+result = sz.classification(X, y)
 print(result)
 print()
 print(result.headroom)
@@ -255,7 +255,7 @@ print(f"Target range: ${y.min()*100_000:.0f} – ${y.max()*100_000:.0f}")
 X.head(3)
 """),
     code("""\
-result = sz.regress(X, y)
+result = sz.regression(X, y)
 print(result)
 print()
 print(result.headroom)
@@ -325,7 +325,7 @@ ts_easy = pd.Series(trend + seasonal + noise, index=idx, name="sales")
 ts_easy.plot(title="Scenario 1: trend + seasonality", figsize=(10, 3))
 """),
     code("""\
-result = sz.forecast(ts_easy, horizon=12)
+result = sz.forecasting(ts_easy, horizon=12)
 print(result)
 print()
 print(result.headroom)
@@ -352,7 +352,7 @@ ts_hard = pd.Series(50 + seasonal2 + noise2, index=idx2, name="demand")
 ts_hard.plot(title="Scenario 2: high-noise seasonal", figsize=(10, 3))
 """),
     code("""\
-result2 = sz.forecast(ts_hard, horizon=6)
+result2 = sz.forecasting(ts_hard, horizon=6)
 print(result2)
 print()
 print(result2.headroom)
@@ -386,15 +386,15 @@ ax.set_title("IoT sensor signal")
 ax.legend()
 """),
     code("""\
-result3 = sz.detect_anomalies(sensor)
+result3 = sz.anomaly_detection(sensor)
 print(result3)
 print()
 print(result3.headroom)
 """),
     code("""\
 # Compare z-score vs IQR side by side
-result_z = sz.detect_anomalies(sensor, method="zscore")
-result_iqr = sz.detect_anomalies(sensor, method="iqr")
+result_z = sz.anomaly_detection(sensor, method="zscore")
+result_iqr = sz.anomaly_detection(sensor, method="iqr")
 
 fig, axes = plt.subplots(3, 1, figsize=(12, 9), sharex=True)
 

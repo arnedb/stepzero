@@ -14,7 +14,7 @@ from .._runner import fit_best, run_cv
 from .._types import ClassifyResult, ModelScore
 
 
-def classify(
+def classification(
     X: Union[np.ndarray, pd.DataFrame],
     y: Union[np.ndarray, pd.Series, list],
     *,
@@ -38,7 +38,7 @@ def classify(
     Example:
         >>> from sklearn.datasets import load_iris
         >>> X, y = load_iris(return_X_y=True)
-        >>> result = classify(X, y)
+        >>> result = classification(X, y)
         >>> print(result)
         ClassifyResult(best='logistic', accuracy=0.960, headroom='Low')
         >>> result.best_model.predict(X[:5])

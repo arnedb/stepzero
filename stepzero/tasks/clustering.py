@@ -12,7 +12,7 @@ from .._headroom import headroom_from_silhouette
 from .._types import ClusterResult, ModelScore
 
 
-def cluster(
+def clustering(
     X: Union[np.ndarray, pd.DataFrame],
     *,
     k_range: tuple[int, int] = (2, 10),
@@ -33,7 +33,7 @@ def cluster(
     Example:
         >>> from sklearn.datasets import make_blobs
         >>> X, _ = make_blobs(n_samples=300, centers=4, random_state=0)
-        >>> result = cluster(X)
+        >>> result = clustering(X)
         >>> result.best_k
         4
         >>> result.labels[:10]

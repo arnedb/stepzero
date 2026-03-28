@@ -102,7 +102,7 @@ def _build_future_index(series: pd.Series, horizon: int) -> pd.Index:
     return pd.RangeIndex(start=len(series), stop=len(series) + horizon)
 
 
-def forecast(
+def forecasting(
     series: Union[pd.Series, np.ndarray, list],
     horizon: int,
     *,
@@ -128,7 +128,7 @@ def forecast(
     Example:
         >>> import pandas as pd
         >>> ts = pd.Series(range(48), index=pd.date_range("2020-01", periods=48, freq="M"))
-        >>> result = forecast(ts, horizon=12)
+        >>> result = forecasting(ts, horizon=12)
         >>> result.forecast
     """
     if not isinstance(series, pd.Series):

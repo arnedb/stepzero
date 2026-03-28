@@ -1,15 +1,15 @@
-from .classify import classify
-from .cluster import cluster
-from .detect_anomalies import detect_anomalies
-from .forecast import forecast
-from .regress import regress
-from .text_classify import text_classify
+from .classification import classification
+from .clustering import clustering
+from .anomaly_detection import anomaly_detection
+from .forecasting import forecasting
+from .regression import regression
+from .text_classification import text_classification
 
 __all__ = [
-    "classify",
-    "regress",
-    "forecast",
-    "detect_anomalies",
-    "text_classify",
-    "cluster",
+    "classification",
+    "regression",
+    "forecasting",
+    "anomaly_detection",
+    "text_classification",
+    "clustering",
 ]

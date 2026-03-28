@@ -13,7 +13,7 @@ from .._runner import fit_best, run_cv
 from .._types import RegressResult
 
 
-def regress(
+def regression(
     X: Union[np.ndarray, pd.DataFrame],
     y: Union[np.ndarray, pd.Series, list],
     *,
@@ -37,7 +37,7 @@ def regress(
     Example:
         >>> from sklearn.datasets import load_diabetes
         >>> X, y = load_diabetes(return_X_y=True)
-        >>> result = regress(X, y)
+        >>> result = regression(X, y)
         >>> print(result)
         RegressResult(best='ridge', root mean squared error=53.476, headroom='Medium')
         >>> result.feature_importance.head(5)

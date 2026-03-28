@@ -32,7 +32,7 @@ def _auto_threshold(scores: np.ndarray, contamination: float = 0.05) -> float:
     return float(np.nanpercentile(scores, 100 * (1 - contamination)))
 
 
-def detect_anomalies(
+def anomaly_detection(
     series: Union[pd.Series, np.ndarray, list],
     *,
     threshold: Optional[float] = None,
@@ -54,7 +54,7 @@ def detect_anomalies(
         >>> rng = np.random.default_rng(0)
         >>> data = rng.normal(0, 1, 100)
         >>> data[[10, 50, 90]] = 10  # inject anomalies
-        >>> result = detect_anomalies(data)
+        >>> result = anomaly_detection(data)
         >>> result.anomalies[result.anomalies].index.tolist()
     """
     if not isinstance(series, pd.Series):

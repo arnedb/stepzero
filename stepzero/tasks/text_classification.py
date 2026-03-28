@@ -15,7 +15,7 @@ from .._runner import fit_best, run_cv
 from .._types import ModelScore, TextClassifyResult
 
 
-def text_classify(
+def text_classification(
     texts: Union[list[str], pd.Series],
     labels: Union[np.ndarray, pd.Series, list],
     *,
@@ -39,7 +39,7 @@ def text_classify(
     Example:
         >>> texts = ["I love this", "This is great", "Terrible", "Awful product"]
         >>> labels = [1, 1, 0, 0]
-        >>> result = text_classify(texts, labels)
+        >>> result = text_classification(texts, labels)
         >>> result.top_features_per_class
     """
     if isinstance(texts, pd.Series):

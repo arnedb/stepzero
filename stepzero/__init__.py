@@ -6,12 +6,12 @@ a few alternatives, and get a signal on whether it's worth going further.
 Usage:
     import stepzero as sz
 
-    result = sz.classify(X, y)
-    result = sz.regress(X, y)
-    result = sz.forecast(series, horizon=12)
-    result = sz.detect_anomalies(series)
-    result = sz.text_classify(texts, labels)
-    result = sz.cluster(X)
+    result = sz.classification(X, y)
+    result = sz.regression(X, y)
+    result = sz.forecasting(series, horizon=12)
+    result = sz.anomaly_detection(series)
+    result = sz.text_classification(texts, labels)
+    result = sz.clustering(X)
 
 Every result includes:
     .best_model       — fitted sklearn-compatible model (call .predict() directly)
@@ -20,12 +20,12 @@ Every result includes:
     .headroom         — HeadroomSignal: Low/Medium/High + actionable next step
 """
 
-from .tasks.classify import classify
-from .tasks.cluster import cluster
-from .tasks.detect_anomalies import detect_anomalies
-from .tasks.forecast import forecast
-from .tasks.regress import regress
-from .tasks.text_classify import text_classify
+from .tasks.classification import classification
+from .tasks.clustering import clustering
+from .tasks.anomaly_detection import anomaly_detection
+from .tasks.forecasting import forecasting
+from .tasks.regression import regression
+from .tasks.text_classification import text_classification
 from ._types import (
     AnomalyResult,
     ClassifyResult,
@@ -40,12 +40,12 @@ from ._types import (
 __version__ = "0.1.0"
 
 __all__ = [
-    "classify",
-    "regress",
-    "forecast",
-    "detect_anomalies",
-    "text_classify",
-    "cluster",
+    "classification",
+    "regression",
+    "forecasting",
+    "anomaly_detection",
+    "text_classification",
+    "clustering",
     "ClassifyResult",
     "RegressResult",
     "ForecastResult",
