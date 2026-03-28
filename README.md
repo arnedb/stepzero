@@ -1,7 +1,8 @@
 # stepzero
 
 [![Tests](https://github.com/arnedb/stepzero/actions/workflows/tests.yml/badge.svg)](https://github.com/arnedb/stepzero/actions/workflows/tests.yml)
-[![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://pypi.org/project/stepzero/)
+[![PyPI](https://img.shields.io/pypi/v/stepzero)](https://pypi.org/project/stepzero/)
+[![Python](https://img.shields.io/pypi/pyversions/stepzero)](https://pypi.org/project/stepzero/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 **Task-first ML baselines. Run the simplest thing that could work.**
