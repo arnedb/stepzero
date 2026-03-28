@@ -42,8 +42,8 @@ result.feature_importance  # pd.Series sorted by importance
 result.headroom            # HeadroomSignal(level, reason)
 ```
 
-**Methods:** logistic regression, decision tree, naive bayes
-**Metric:** accuracy (5-fold stratified CV)
+- **Methods:** logistic regression, decision tree, naive bayes
+- **Metric:** accuracy (5-fold stratified CV)
 
 ### Regression
 
@@ -55,8 +55,8 @@ result.feature_importance  # normalized importances as pd.Series
 result.headroom
 ```
 
-**Methods:** ridge, decision tree
-**Metric:** RMSE (5-fold CV)
+- **Methods:** ridge, decision tree
+- **Metric:** RMSE (5-fold CV)
 
 ### Forecasting
 
@@ -69,9 +69,9 @@ result.scores          # MAE per model
 result.headroom
 ```
 
-**Methods:** seasonal naive, linear trend
-**Parameters:** `horizon`, `freq` (optional — inferred from DatetimeIndex), `cv_splits`
-**Metric:** MAE (time-series CV)
+- **Methods:** seasonal naive, linear trend
+- **Parameters:** `horizon`, `freq` (optional — inferred from DatetimeIndex), `cv_splits`
+- **Metric:** MAE (time-series CV)
 
 ### Anomaly Detection
 
@@ -85,9 +85,9 @@ result.threshold   # auto-determined threshold
 result.headroom
 ```
 
-**Methods:** z-score, IQR
-**Parameters:** `threshold` (optional — auto-set to flag ~5% of points), `method`
-**Metric:** inter-method agreement
+- **Methods:** z-score, IQR
+- **Parameters:** `threshold` (optional — auto-set to flag ~5% of points), `method`
+- **Metric:** inter-method agreement
 
 ### Text Classification
 
@@ -99,8 +99,8 @@ result.top_features_per_class # {"class_0": ["word1", ...], ...}
 result.headroom
 ```
 
-**Methods:** TF-IDF + logistic regression, TF-IDF + naive bayes
-**Metric:** accuracy (5-fold stratified CV)
+- **Methods:** TF-IDF + logistic regression, TF-IDF + naive bayes
+- **Metric:** accuracy (5-fold stratified CV)
 
 ### Clustering
 
@@ -114,9 +114,9 @@ result.scores    # silhouette score per k tried
 result.headroom
 ```
 
-**Methods:** k-means
-**Parameters:** `k_range`
-**Metric:** silhouette score
+- **Methods:** k-means
+- **Parameters:** `k_range`
+- **Metric:** silhouette score
 
 ---
 
@@ -150,13 +150,13 @@ print(result.headroom)
 
 ## When to use stepzero
 
-✅ Starting a new ML project and want a defensible baseline in 5 minutes
-✅ Proving (or disproving) that a simple model is good enough
-✅ Teaching or demonstrating ML without the XGBoost-first bias
-✅ Kaggle competitions — establish your baseline before tuning
+- ✅ Starting a new ML project and want a defensible baseline in 5 minutes
+- ✅ Proving (or disproving) that a simple model is good enough
+- ✅ Teaching or demonstrating ML without the XGBoost-first bias
+- ✅ Kaggle competitions — establish your baseline before tuning
 
-❌ You already know a complex model is needed
-❌ You need production-grade model selection with hyperparameter tuning (use AutoML)
+- ❌ You already know a complex model is needed
+- ❌ You need production-grade model selection with hyperparameter tuning (use AutoML)
 
 ---
 
