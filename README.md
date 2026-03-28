@@ -1,5 +1,10 @@
 # stepzero
 
+[![Tests](https://github.com/arnedb/stepzero/actions/workflows/tests.yml/badge.svg)](https://github.com/arnedb/stepzero/actions/workflows/tests.yml)
+[![PyPI](https://img.shields.io/pypi/v/stepzero)](https://pypi.org/project/stepzero/)
+[![Python](https://img.shields.io/pypi/pyversions/stepzero)](https://pypi.org/project/stepzero/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 **Task-first ML baselines. Run the simplest thing that could work.**
 
 Before reaching for XGBoost or a neural net, run `stepzero`. It fits the simplest sensible model for your task, compares a few alternatives, and tells you whether your baseline is good enough or what to try next.
