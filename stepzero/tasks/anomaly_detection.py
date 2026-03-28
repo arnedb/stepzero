@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 from .._headroom import headroom_from_agreement
-from .._types import AnomalyResult
+from .._types import AnomalyDetectionResult
 
 
 def _zscore_scores(values: np.ndarray) -> np.ndarray:
@@ -37,7 +37,7 @@ def anomaly_detection(
     *,
     threshold: Optional[float] = None,
     method: str = "auto",
-) -> AnomalyResult:
+) -> AnomalyDetectionResult:
     """Detect anomalies using Z-score and/or IQR methods.
 
     Args:
@@ -47,7 +47,7 @@ def anomaly_detection(
                 returns the result from the method with higher internal consistency.
 
     Returns:
-        AnomalyResult with anomaly mask, scores, and headroom signal.
+        AnomalyDetectionResult with anomaly mask, scores, and headroom signal.
 
     Example:
         >>> import numpy as np
@@ -99,7 +99,7 @@ def anomaly_detection(
 
         anomaly_mask = pd.Series(chosen_scores > chosen_threshold, index=series.index)
         score_series = pd.Series(chosen_scores, index=series.index)
-        return AnomalyResult(
+        return AnomalyDetectionResult(
             method=chosen_method,
             threshold=float(chosen_threshold),
             anomalies=anomaly_mask,
@@ -120,7 +120,7 @@ def anomaly_detection(
 
     headroom = headroom_from_agreement(agreement_ratio, "anomaly")
 
-    return AnomalyResult(
+    return AnomalyDetectionResult(
         method=chosen_method,
         threshold=float(chosen_threshold),
         anomalies=anomaly_mask,

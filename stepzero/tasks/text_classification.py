@@ -12,7 +12,7 @@ from sklearn.pipeline import Pipeline
 from .._headroom import compute_headroom
 from .._preprocessing import to_1d
 from .._runner import fit_best, run_cv
-from .._types import ModelScore, TextClassifyResult
+from .._types import ModelScore, TextClassificationResult
 
 
 def text_classification(
@@ -21,7 +21,7 @@ def text_classification(
     *,
     cv: int = 5,
     random_state: int = 42,
-) -> TextClassifyResult:
+) -> TextClassificationResult:
     """Run TF-IDF + Logistic Regression and TF-IDF + Naive Bayes.
 
     Automatically builds a TF-IDF vectorizer with unigrams and bigrams.
@@ -34,7 +34,7 @@ def text_classification(
         random_state: Seed for reproducibility.
 
     Returns:
-        TextClassifyResult with best_model, scores, headroom, and top_features_per_class.
+        TextClassificationResult with best_model, scores, headroom, and top_features_per_class.
 
     Example:
         >>> texts = ["I love this", "This is great", "Terrible", "Awful product"]
@@ -93,7 +93,7 @@ def text_classification(
         higher_is_better=True,
     )
 
-    return TextClassifyResult(
+    return TextClassificationResult(
         best_model=best_pipeline,
         best_model_name=best_name,
         scores=scores,

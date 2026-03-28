@@ -9,7 +9,7 @@ from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
 
 from .._headroom import headroom_from_silhouette
-from .._types import ClusterResult, ModelScore
+from .._types import ClusteringResult, ModelScore
 
 
 def clustering(
@@ -17,7 +17,7 @@ def clustering(
     *,
     k_range: tuple[int, int] = (2, 10),
     random_state: int = 42,
-) -> ClusterResult:
+) -> ClusteringResult:
     """Run K-means across a range of k values, select best k via elbow + silhouette.
 
     Automatically scales features before clustering.
@@ -28,7 +28,7 @@ def clustering(
         random_state: Seed for reproducibility.
 
     Returns:
-        ClusterResult with best_k, cluster labels, centers, scores, and headroom.
+        ClusteringResult with best_k, cluster labels, centers, scores, and headroom.
 
     Example:
         >>> from sklearn.datasets import make_blobs
@@ -101,7 +101,7 @@ def clustering(
     best_silhouette = silhouettes[best_idx]
     headroom = headroom_from_silhouette(best_silhouette)
 
-    return ClusterResult(
+    return ClusteringResult(
         best_k=best_k,
         labels=labels_best,
         scores=scores,

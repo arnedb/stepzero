@@ -108,7 +108,7 @@ def test_result_repr():
     X, y = load_iris(return_X_y=True)
     result = sz.classification(X, y)
     r = repr(result)
-    assert "ClassifyResult" in r
+    assert "ClassificationResult" in r
     assert "headroom=" in r
 
 

@@ -7,7 +7,7 @@ import pandas as pd
 from sklearn.model_selection import TimeSeriesSplit
 
 from .._headroom import compute_headroom
-from .._types import ForecastResult, ModelScore
+from .._types import ForecastingResult, ModelScore
 
 _FREQ_TO_SEASON = {
     "H": 24,
@@ -108,7 +108,7 @@ def forecasting(
     *,
     freq: Optional[str] = None,
     cv_splits: int = 3,
-) -> ForecastResult:
+) -> ForecastingResult:
     """Run Seasonal Naive and Linear Trend models on a time series.
 
     Selects the best model via time-series cross-validation (MAE),
@@ -123,7 +123,7 @@ def forecasting(
         cv_splits: Number of time-series CV splits (default 3).
 
     Returns:
-        ForecastResult with best_model_name, scores, forecast Series, and headroom.
+        ForecastingResult with best_model_name, scores, forecast Series, and headroom.
 
     Example:
         >>> import pandas as pd
@@ -198,7 +198,7 @@ def forecasting(
             ),
         )
 
-    return ForecastResult(
+    return ForecastingResult(
         best_model=None,  # stateless — reconstruct from best_model_name + series
         best_model_name=best_name,
         scores=scores,

@@ -10,7 +10,7 @@ from sklearn.tree import DecisionTreeRegressor
 from .._headroom import compute_headroom
 from .._preprocessing import build_tabular_pipeline, to_1d
 from .._runner import fit_best, run_cv
-from .._types import RegressResult
+from .._types import RegressionResult
 
 
 def regression(
@@ -19,7 +19,7 @@ def regression(
     *,
     cv: int = 5,
     random_state: int = 42,
-) -> RegressResult:
+) -> RegressionResult:
     """Run Ridge regression and Decision Tree regressor.
 
     Returns the best model with RMSE scores, feature importance,
@@ -32,14 +32,14 @@ def regression(
         random_state: Seed for reproducibility.
 
     Returns:
-        RegressResult with best_model, scores, feature_importance, and headroom.
+        RegressionResult with best_model, scores, feature_importance, and headroom.
 
     Example:
         >>> from sklearn.datasets import load_diabetes
         >>> X, y = load_diabetes(return_X_y=True)
         >>> result = regression(X, y)
         >>> print(result)
-        RegressResult(best='ridge', root mean squared error=53.476, headroom='Medium')
+        RegressionResult(best='ridge', root mean squared error=53.476, headroom='Medium')
         >>> result.feature_importance.head(5)
     """
     y_arr = to_1d(y)
@@ -110,7 +110,7 @@ def regression(
         higher_is_better=False,
     )
 
-    return RegressResult(
+    return RegressionResult(
         best_model=best_pipeline,
         best_model_name=best_name,
         scores=scores,

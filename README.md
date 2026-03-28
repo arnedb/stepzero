@@ -9,7 +9,7 @@ import stepzero as sz
 
 result = sz.classification(X, y)
 print(result)
-# ClassifyResult(best='logistic', accuracy=0.960, headroom='Low')
+# ClassificationResult(best='logistic', accuracy=0.960, headroom='Low')
 
 print(result.headroom)
 # [Low] Score of 0.96 with low variance (±0.012). The simple baseline is already

@@ -27,14 +27,14 @@ from .tasks.forecasting import forecasting
 from .tasks.regression import regression
 from .tasks.text_classification import text_classification
 from ._types import (
-    AnomalyResult,
-    ClassifyResult,
-    ClusterResult,
-    ForecastResult,
+    AnomalyDetectionResult,
+    ClassificationResult,
+    ClusteringResult,
+    ForecastingResult,
     HeadroomSignal,
     ModelScore,
-    RegressResult,
-    TextClassifyResult,
+    RegressionResult,
+    TextClassificationResult,
 )
 
 __version__ = "0.1.0"
@@ -46,12 +46,12 @@ __all__ = [
     "anomaly_detection",
     "text_classification",
     "clustering",
-    "ClassifyResult",
-    "RegressResult",
-    "ForecastResult",
-    "AnomalyResult",
-    "TextClassifyResult",
-    "ClusterResult",
+    "ClassificationResult",
+    "RegressionResult",
+    "ForecastingResult",
+    "AnomalyDetectionResult",
+    "TextClassificationResult",
+    "ClusteringResult",
     "HeadroomSignal",
     "ModelScore",
 ]

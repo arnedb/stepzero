@@ -11,7 +11,7 @@ from sklearn.linear_model import LogisticRegression
 from .._headroom import compute_headroom
 from .._preprocessing import build_tabular_pipeline, to_1d
 from .._runner import fit_best, run_cv
-from .._types import ClassifyResult, ModelScore
+from .._types import ClassificationResult, ModelScore
 
 
 def classification(
@@ -20,7 +20,7 @@ def classification(
     *,
     cv: int = 5,
     random_state: int = 42,
-) -> ClassifyResult:
+) -> ClassificationResult:
     """Run Logistic Regression, Decision Tree, and Naive Bayes.
 
     Automatically handles scaling, missing values, and categorical encoding.
@@ -33,14 +33,14 @@ def classification(
         random_state: Seed for reproducibility.
 
     Returns:
-        ClassifyResult with best_model, scores, headroom, and feature_importance.
+        ClassificationResult with best_model, scores, headroom, and feature_importance.
 
     Example:
         >>> from sklearn.datasets import load_iris
         >>> X, y = load_iris(return_X_y=True)
         >>> result = classification(X, y)
         >>> print(result)
-        ClassifyResult(best='logistic', accuracy=0.960, headroom='Low')
+        ClassificationResult(best='logistic', accuracy=0.960, headroom='Low')
         >>> result.best_model.predict(X[:5])
     """
     y_arr = to_1d(y)
@@ -111,7 +111,7 @@ def classification(
         higher_is_better=True,
     )
 
-    return ClassifyResult(
+    return ClassificationResult(
         best_model=best_pipeline,
         best_model_name=best_name,
         scores=scores,

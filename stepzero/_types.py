@@ -26,7 +26,7 @@ class HeadroomSignal:
 
 
 @dataclass
-class ClassifyResult:
+class ClassificationResult:
     best_model: Any
     best_model_name: str
     scores: list[ModelScore]
@@ -36,14 +36,14 @@ class ClassifyResult:
     def __repr__(self) -> str:
         score = next(s for s in self.scores if s.name == self.best_model_name)
         return (
-            f"ClassifyResult(best={self.best_model_name!r}, "
+            f"ClassificationResult(best={self.best_model_name!r}, "
             f"{score.metric}={score.score:.3f}, "
             f"headroom={self.headroom.level!r})"
         )
 
 
 @dataclass
-class RegressResult:
+class RegressionResult:
     best_model: Any
     best_model_name: str
     scores: list[ModelScore]
@@ -53,14 +53,14 @@ class RegressResult:
     def __repr__(self) -> str:
         score = next(s for s in self.scores if s.name == self.best_model_name)
         return (
-            f"RegressResult(best={self.best_model_name!r}, "
+            f"RegressionResult(best={self.best_model_name!r}, "
             f"{score.metric}={score.score:.3f}, "
             f"headroom={self.headroom.level!r})"
         )
 
 
 @dataclass
-class ForecastResult:
+class ForecastingResult:
     best_model: Any
     best_model_name: str
     scores: list[ModelScore]
@@ -70,7 +70,7 @@ class ForecastResult:
     def __repr__(self) -> str:
         score = next(s for s in self.scores if s.name == self.best_model_name)
         return (
-            f"ForecastResult(best={self.best_model_name!r}, "
+            f"ForecastingResult(best={self.best_model_name!r}, "
             f"{score.metric}={score.score:.3f}, "
             f"horizon={len(self.forecast)}, "
             f"headroom={self.headroom.level!r})"
@@ -78,7 +78,7 @@ class ForecastResult:
 
 
 @dataclass
-class AnomalyResult:
+class AnomalyDetectionResult:
     method: str
     threshold: float
     anomalies: pd.Series
@@ -89,14 +89,14 @@ class AnomalyResult:
         n = self.anomalies.sum()
         pct = 100 * n / len(self.anomalies)
         return (
-            f"AnomalyResult(method={self.method!r}, "
+            f"AnomalyDetectionResult(method={self.method!r}, "
             f"anomalies={n} ({pct:.1f}%), "
             f"headroom={self.headroom.level!r})"
         )
 
 
 @dataclass
-class TextClassifyResult:
+class TextClassificationResult:
     best_model: Any
     best_model_name: str
     scores: list[ModelScore]
@@ -106,14 +106,14 @@ class TextClassifyResult:
     def __repr__(self) -> str:
         score = next(s for s in self.scores if s.name == self.best_model_name)
         return (
-            f"TextClassifyResult(best={self.best_model_name!r}, "
+            f"TextClassificationResult(best={self.best_model_name!r}, "
             f"{score.metric}={score.score:.3f}, "
             f"headroom={self.headroom.level!r})"
         )
 
 
 @dataclass
-class ClusterResult:
+class ClusteringResult:
     best_k: int
     labels: np.ndarray
     scores: list[ModelScore]
@@ -124,7 +124,7 @@ class ClusterResult:
         sil = next((s for s in self.scores if s.metric == "silhouette"), None)
         sil_str = f", silhouette={sil.score:.3f}" if sil else ""
         return (
-            f"ClusterResult(best_k={self.best_k}"
+            f"ClusteringResult(best_k={self.best_k}"
             f"{sil_str}, "
             f"headroom={self.headroom.level!r})"
         )
