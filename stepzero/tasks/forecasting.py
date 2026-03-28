@@ -187,10 +187,10 @@ def forecasting(
     )
 
     # If neither model clearly beats the other, bump headroom up
-    if relative_improvement < 0.05 and headroom.level == "Low":
+    if relative_improvement < 0.05 and headroom.level == "low":
         from .._types import HeadroomSignal
         headroom = HeadroomSignal(
-            level="Medium",
+            level="medium",
             reason=(
                 f"Seasonal naive and linear trend perform similarly (MAE gap < 5%). "
                 f"Both simple models may be missing non-linear structure. "

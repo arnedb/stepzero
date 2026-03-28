@@ -9,10 +9,10 @@ import stepzero as sz
 
 result = sz.classification(X, y)
 print(result)
-# ClassificationResult(best='logistic', accuracy=0.960, headroom='Low')
+# ClassificationResult(best='logistic', accuracy=0.960, headroom='low')
 
 print(result.headroom)
-# [Low] Score of 0.96 with low variance (±0.012). The simple baseline is already
+# [low] Score of 0.96 with low variance (±0.012). The simple baseline is already
 # performing well. Trying a gradient boosted tree is unlikely to offer a meaningful improvement.
 ```
 
@@ -42,8 +42,8 @@ result.feature_importance  # pd.Series sorted by importance
 result.headroom            # HeadroomSignal(level, reason)
 ```
 
-Models compared: Logistic Regression, Decision Tree (depth 5), Gaussian Naive Bayes.
-Metric: accuracy (5-fold stratified CV).
+**Methods:** logistic regression, decision tree, naive bayes
+**Metric:** accuracy (5-fold stratified CV)
 
 ### Regression
 
@@ -52,68 +52,71 @@ result = sz.regression(X, y)
 
 result.best_model_name     # "ridge" | "tree"
 result.feature_importance  # normalized importances as pd.Series
-result.headroom            # compared against predict-mean baseline
+result.headroom
 ```
 
-Models compared: Ridge (α=1), Decision Tree (depth 5).
-Metric: RMSE.
+**Methods:** ridge, decision tree
+**Metric:** RMSE (5-fold CV)
 
 ### Forecasting
 
 ```python
-import pandas as pd
+result = sz.forecasting(series, horizon=12)
 
-ts = pd.Series(..., index=pd.date_range("2020-01", periods=48, freq="ME"))
-result = sz.forecasting(ts, horizon=12)
-
-result.forecast            # pd.Series with future index
-result.best_model_name     # "seasonal_naive" | "linear_trend"
-result.scores              # MAE for each model
+result.forecast        # pd.Series with future timestamps as index
+result.best_model_name # "seasonal_naive" | "linear_trend"
+result.scores          # MAE per model
 result.headroom
 ```
 
-Models compared: Seasonal Naive, Linear Trend + Seasonal Decomposition.
-Metric: MAE (time-series CV).
+**Methods:** seasonal naive, linear trend
+**Parameters:** `horizon`, `freq` (optional — inferred from DatetimeIndex), `cv_splits`
+**Metric:** MAE (time-series CV)
 
 ### Anomaly Detection
 
 ```python
 result = sz.anomaly_detection(series)
 
-result.anomalies           # pd.Series[bool], same index as input
-result.scores              # raw anomaly scores
-result.method              # "zscore" | "iqr"
-result.threshold           # auto-determined threshold
+result.anomalies   # pd.Series[bool], same index as input
+result.scores      # raw anomaly scores
+result.method      # "zscore" | "iqr"
+result.threshold   # auto-determined threshold
 result.headroom
 ```
 
-Methods: Z-score, IQR. `method="auto"` (default) runs both and picks the most consistent one.
+**Methods:** z-score, IQR
+**Parameters:** `threshold` (optional — auto-set to flag ~5% of points), `method`
+**Metric:** inter-method agreement
 
 ### Text Classification
 
 ```python
 result = sz.text_classification(texts, labels)
 
-result.best_model_name          # "tfidf_logistic" | "tfidf_naive_bayes"
-result.top_features_per_class   # {"class_0": ["word1", ...], ...}
+result.best_model_name        # "tfidf_logistic" | "tfidf_naive_bayes"
+result.top_features_per_class # {"class_0": ["word1", ...], ...}
 result.headroom
 ```
 
-Models compared: TF-IDF + Logistic Regression, TF-IDF + Multinomial Naive Bayes.
+**Methods:** TF-IDF + logistic regression, TF-IDF + naive bayes
+**Metric:** accuracy (5-fold stratified CV)
 
 ### Clustering
 
 ```python
 result = sz.clustering(X, k_range=(2, 10))
 
-result.best_k     # selected number of clusters
-result.labels     # cluster assignment per sample (np.ndarray)
-result.centers    # cluster centroids in original feature space
-result.scores     # silhouette score for each k tried
+result.best_k    # selected number of clusters
+result.labels    # cluster assignment per sample (np.ndarray)
+result.centers   # cluster centroids in original feature space
+result.scores    # silhouette score per k tried
 result.headroom
 ```
 
-Method: K-means with auto-k via elbow + silhouette maximization.
+**Methods:** k-means
+**Parameters:** `k_range`
+**Metric:** silhouette score
 
 ---
 
@@ -122,16 +125,16 @@ Method: K-means with auto-k via elbow + silhouette maximization.
 Every result has a `.headroom` attribute:
 
 ```python
-result.headroom.level   # "Low" | "Medium" | "High"
+result.headroom.level   # "low" | "medium" | "high"
 result.headroom.reason  # actionable explanation + what to try next
 print(result.headroom)
-# [Medium] CV accuracy of 0.81 ± 0.04. A 19% gap to ceiling remains.
+# [medium] CV accuracy of 0.81 ± 0.04. A 19% gap to ceiling remains.
 # A gradient boosted tree (e.g., XGBoost or LightGBM) is a natural next step.
 ```
 
-- **Low** — the simple model is already doing well; complexity buys little
-- **Medium** — meaningful headroom remains; a tuned model may help
-- **High** — the baseline is underperforming; a more complex model is likely worth it
+- **low** — the simple model is already doing well; complexity buys little
+- **medium** — meaningful headroom remains; a tuned model may help
+- **high** — the baseline is underperforming; a more complex model is likely worth it
 
 ---
 

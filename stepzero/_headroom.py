@@ -57,7 +57,7 @@ def compute_headroom(
     headroom_score = _clamp(headroom_score, 0.0, 1.0)
 
     if headroom_score < 0.3:
-        level = "Low"
+        level = "low"
         if higher_is_better:
             reason = (
                 f"Score of {best_score:.2f} with low variance (±{cv_std:.3f}). "
@@ -71,7 +71,7 @@ def compute_headroom(
                 f"Trying {next_step} is unlikely to offer a meaningful improvement."
             )
     elif headroom_score < 0.6:
-        level = "Medium"
+        level = "medium"
         if higher_is_better:
             gap_pct = gap * 100
             reason = (
@@ -86,7 +86,7 @@ def compute_headroom(
                 f"Trying {next_step} may yield a moderate improvement."
             )
     else:
-        level = "High"
+        level = "high"
         if higher_is_better:
             reason = (
                 f"Score of {best_score:.2f} with high variance (±{cv_std:.3f}). "
@@ -108,7 +108,7 @@ def headroom_from_agreement(agreement_ratio: float, task_type: str) -> HeadroomS
     next_step = _NEXT_STEP.get(task_type, "a more complex model")
     if agreement_ratio > 0.7:
         return HeadroomSignal(
-            level="Low",
+            level="low",
             reason=(
                 f"Both detection methods agree on {agreement_ratio:.0%} of flagged points. "
                 f"The anomaly pattern is clear. {next_step} is unlikely to improve substantially."
@@ -116,7 +116,7 @@ def headroom_from_agreement(agreement_ratio: float, task_type: str) -> HeadroomS
         )
     elif agreement_ratio > 0.4:
         return HeadroomSignal(
-            level="Medium",
+            level="medium",
             reason=(
                 f"Methods agree on {agreement_ratio:.0%} of flagged points. "
                 f"Some ambiguity remains. Consider {next_step} for a more robust detection."
@@ -124,7 +124,7 @@ def headroom_from_agreement(agreement_ratio: float, task_type: str) -> HeadroomS
         )
     else:
         return HeadroomSignal(
-            level="High",
+            level="high",
             reason=(
                 f"Methods agree on only {agreement_ratio:.0%} of flagged points. "
                 f"The anomaly structure may be complex. Try {next_step}."
@@ -137,7 +137,7 @@ def headroom_from_silhouette(silhouette: float, task_type: str = "cluster") -> H
     next_step = _NEXT_STEP.get(task_type, "a more complex model")
     if silhouette > 0.6:
         return HeadroomSignal(
-            level="Low",
+            level="low",
             reason=(
                 f"Silhouette score of {silhouette:.3f} indicates well-separated clusters. "
                 f"K-means is working well here."
@@ -145,7 +145,7 @@ def headroom_from_silhouette(silhouette: float, task_type: str = "cluster") -> H
         )
     elif silhouette > 0.3:
         return HeadroomSignal(
-            level="Medium",
+            level="medium",
             reason=(
                 f"Silhouette score of {silhouette:.3f} indicates moderate cluster separation. "
                 f"Try {next_step} for potentially better cluster structure."
@@ -153,7 +153,7 @@ def headroom_from_silhouette(silhouette: float, task_type: str = "cluster") -> H
         )
     else:
         return HeadroomSignal(
-            level="High",
+            level="high",
             reason=(
                 f"Silhouette score of {silhouette:.3f} indicates poor cluster separation. "
                 f"K-means may not be the right fit. Try {next_step}."

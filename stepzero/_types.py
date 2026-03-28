@@ -18,7 +18,7 @@ class ModelScore:
 class HeadroomSignal:
     """Estimate of how much improvement a more complex model could offer."""
 
-    level: str  # "Low" | "Medium" | "High"
+    level: str  # "low" | "medium" | "high"
     reason: str
 
     def __str__(self) -> str:
