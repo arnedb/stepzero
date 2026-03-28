@@ -132,9 +132,9 @@ print(result.headroom)
 # A gradient boosted tree (e.g., XGBoost or LightGBM) is a natural next step.
 ```
 
-- **low** — the simple model is already doing well; complexity buys little
-- **medium** — meaningful headroom remains; a tuned model may help
-- **high** — the baseline is underperforming; a more complex model is likely worth it
+- **low** means that the simple model is already doing well; complexity buys little
+- **medium** means that meaningful headroom remains; a tuned model may help
+- **high** means that the baseline is underperforming; a more complex model is likely worth it
 
 ---
 
@@ -155,8 +155,17 @@ print(result.headroom)
 - ✅ Teaching or demonstrating ML without the XGBoost-first bias
 - ✅ Kaggle competitions — establish your baseline before tuning
 
-- ❌ You already know a complex model is needed
-- ❌ You need production-grade model selection with hyperparameter tuning (use AutoML)
+---
+
+## Contributing
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow.
+
+In short: branch from `develop`, open a PR targeting `develop`. All PRs run the test suite automatically across Python 3.10–3.12.
+
+## Reporting issues
+
+Open an issue on GitHub. Include your Python version, stepzero version, and a minimal reproducible example.
 
 ---
 
